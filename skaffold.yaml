@@ -1,0 +1,13 @@
+apiVersion: skaffold/v4beta8
+kind: Config
+metadata:
+  name: testapp
+build:
+  artifacts:
+    - image: testapp
+      docker:
+        dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - deploy/deployment.yaml
+    - deploy/service.yaml

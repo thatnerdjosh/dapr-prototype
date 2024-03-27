@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testapp
+  labels:
+    app: testapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testapp
+  template:
+    metadata:
+      labels:
+        app: testapp
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "testapp"
+        dapr.io/app-port: "8080"
+        dapr.io/enable-api-logging: "true"
+        dapr.io/log-as-json: "true"
+        dapr.io/enable-metrics: "true"
+        dapr.io/metrics-port: "9090"
+        dapr.io/config: "tracing" # TODO: Check if multiple configs can be associated...
+    spec:
+      containers:
+      - name: testapp
+        image: testapp
+        resources: {}
